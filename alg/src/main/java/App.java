@@ -11,6 +11,6 @@ public class App {
         }
         int a = 1000;
         singlelist.SNode node = new singlelist.SNode(a, null);
-        System.out.print(node.getData());
+        System.out.print(node);
     }
 }
