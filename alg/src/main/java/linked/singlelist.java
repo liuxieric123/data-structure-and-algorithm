@@ -24,8 +24,23 @@ public class singlelist {
 
     public void deleteByIndex (int index) {
 
-    }
 
+    }
+    // 带头结点的单链表反转
+    public SNode inverseWithHead (SNode head) {
+        if (head == null || head.next == null || head.next.next == null) {
+            return head;
+        }
+        SNode cur = head.next.next;
+        head.next.next = null;
+        while (cur != null) {
+            SNode tmp = cur.next;
+            cur.next = head.next;
+            head.next = cur;
+            cur = tmp;
+        }
+        return head;
+    }
 
 
     public static class SNode{
