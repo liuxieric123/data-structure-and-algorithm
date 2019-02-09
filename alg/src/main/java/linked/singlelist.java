@@ -42,6 +42,17 @@ public class singlelist {
         return head;
     }
 
+    public SNode inverseWithoutHead (SNode h) {
+        SNode pre = null, cur = h, next = h.next;
+        while( cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
 
     public static class SNode{
 
