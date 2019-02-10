@@ -41,8 +41,9 @@ public class singlelist {
         }
         return head;
     }
-
+    // 不带头节点的单链表反转
     public SNode inverseWithoutHead (SNode h) {
+        // 考虑如果节点是null的话，.next是什么
         SNode pre = null, cur = h, next = h.next;
         while( cur != null) {
             next = cur.next;
@@ -53,7 +54,27 @@ public class singlelist {
         return pre;
     }
 
-
+    // 单链表判断是否回文
+    public Boolean isPalindrom (SNode s) {
+        int len = 0;
+        for (SNode cur = s;  cur != null; cur = cur.next, ++len);
+        SNode pre = null, cur = s, next = s.next;
+        for (int i = 0; i < len / 2; i++) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        if (len % 2 == 1) cur = cur.next;
+        for (int i = 0; i < len / 2; i++) {
+            if (pre.element != cur.element) {
+                return false;
+            }
+            pre = pre.next;
+            cur = cur.next;
+        }
+        return true;
+    }
     public static class SNode{
 
         private int element;
