@@ -54,7 +54,7 @@ public class singlelist {
         return pre;
     }
 
-    // 单链表判断是否回文
+    // 单链表判断是否回文，使用单链表反转
     public Boolean isPalindrom (SNode s) {
         int len = 0;
         for (SNode cur = s;  cur != null; cur = cur.next, ++len);
@@ -75,6 +75,17 @@ public class singlelist {
         }
         return true;
     }
+
+    // 找到单链表的中间节点
+    public SNode findMiddle (SNode s) {
+        SNode slow = s, fast = s.next;
+        while (slow != null && fast != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
     public static class SNode{
 
         private int element;
