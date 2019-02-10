@@ -86,6 +86,16 @@ public class singlelist {
         return slow;
     }
 
+    public Boolean isLoop (SNode s) {
+        SNode slow = s, fast = s.next;
+        while (fast != null) {
+            if (fast == slow) return true;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
+    }
+
     public static class SNode{
 
         private int element;
