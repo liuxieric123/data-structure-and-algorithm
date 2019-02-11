@@ -85,7 +85,7 @@ public class singlelist {
         }
         return slow;
     }
-
+    // 判断单链表中是否存在环
     public Boolean isLoop (SNode s) {
         SNode slow = s, fast = s.next;
         while (fast != null) {
@@ -94,6 +94,24 @@ public class singlelist {
             fast = fast.next.next;
         }
         return false;
+    }
+
+    // 合并两个有序单链表
+    public SNode mergeTwoSortedSinglelist (SNode s1, SNode s2) {
+        SNode dummy = new SNode(), p = dummy;
+        while(s1 != null && s2 != null) {
+            if (s1.element < s2.element) {
+                p.next = s1;
+                s1 = s1.next;
+            } else {
+                p.next = s2;
+                s2 = s2.next;
+            }
+            p = p.next;
+        }
+        if (s1 != null) p.next = s1;
+        if (s2 != null) p.next = s2;
+        return dummy.next;
     }
 
     public static class SNode{
