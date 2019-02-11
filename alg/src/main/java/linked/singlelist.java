@@ -114,6 +114,22 @@ public class singlelist {
         return dummy.next;
     }
 
+    // 移除单链表的倒数第n个节点
+    public SNode removeNthFromEnd (SNode s, int n) {
+        SNode dummy = new SNode(); 
+        dummy.next = s;
+        SNode p = dummy, q = dummy;
+        int i;
+        for (i = 0; p != null && i < n; i++) p = p.next;
+        if (i < n) return dummy.next;
+        while(p != null) {
+            p = p.next;
+            q = q.next;
+        }
+        q.next = q.next.next;
+        return dummy.next;
+    }
+
     public static class SNode{
 
         private int element;
