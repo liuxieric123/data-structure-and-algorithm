@@ -130,6 +130,48 @@ public class singlelist {
         return dummy.next;
     }
 
+    // 单链表实现lru
+    public class lru{
+
+        SNode data = new SNode();
+
+        private final static int DEFAULT_CAPACITY = 10;
+
+        public int length = 0;
+
+        public void put (int val) {
+            SNode pre = findByValueReturnPre(val);
+            if (pre != null) {
+                data.next = pre.next;
+                pre.next = pre.next.next;
+            } else {
+                if (length >= DEFAULT_CAPACITY)  deleteEnd();  
+                SNode tmp = new SNode(val);
+                tmp.next = data.next;
+                data.next = tmp; 
+            }
+        }
+
+        private SNode findByValueReturnPre (int val) {
+            SNode p = data;
+            SNode pre = null;
+            while (p != null) {
+                if (p.element == val) return pre;
+                pre = p;
+                p = p.next;
+            }
+            return null;
+        }
+
+        private void deleteEnd () {
+            SNode head = data;
+            while(head.next.next != null) {
+                head = head.next;
+            }
+            head.next = null;
+        }
+    }
+
     public static class SNode{
 
         private int element;
