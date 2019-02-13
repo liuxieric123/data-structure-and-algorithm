@@ -1,5 +1,5 @@
-import java.util.Scanner;
-import linked.singlelist;;
+import linked.singlelist;
+import stack.stackWithNode;
 public class App {
 
     public static void main(String[] args) {
@@ -11,6 +11,11 @@ public class App {
         }
         int a = 1000;
         singlelist.SNode node = new singlelist.SNode(a, null);
-        System.out.print(node);
+        System.out.println(node);
+        stackWithNode s = new stackWithNode();
+        s.push(1);
+        s.push(2);
+        s.push(7);
+        s.printAll();
     }
 }
