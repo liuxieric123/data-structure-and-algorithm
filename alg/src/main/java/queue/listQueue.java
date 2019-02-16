@@ -38,7 +38,7 @@ public class listQueue {
     public int dequeue () {
         if (head == tail) {
             if (head == null) {
-                return false;
+                return null;
             } else {
                 int tmp = head.val;
                 head = null;
@@ -50,6 +50,4 @@ public class listQueue {
         head = head.next;
         return tmp;
     }
-
-
 }
