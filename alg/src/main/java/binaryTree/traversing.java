@@ -1,7 +1,6 @@
 package binaryTree;
 
 import java.util.*;
-import java.lang.*;
 
 public class traversing {
     private class treeNode {
