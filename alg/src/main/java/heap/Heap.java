@@ -33,14 +33,10 @@ public class Heap {
         int i = 1;
         while (true) {
             int pos = i;
-            if (data[i] < data[i*2] && data[i] < data[i*2+1]) {
+            if (i*2 <= count && data[i] < data[i*2]) {
                 pos = i*2;
-            }else if (data[i] < data[i*2]) {
-                pos = i * 2;
-            }else if (data[i] < data[i*2+1]) {
+            }else if (i*2+1 <= count && data[i] < data[i*2+1]) {
                 pos = i * 2 + 1;
-            }else {
-                break;
             }
             if (i == pos) break;
             swap(data, i, pos); 
