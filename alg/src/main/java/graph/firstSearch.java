@@ -7,6 +7,7 @@ public class firstSearch {
     public class Graph {
         public int v;
         public LinkedList<Integer> adj[];
+        private boolean foundDFS = false;
 
         public Graph (int v) {
             this.v = v;
@@ -50,7 +51,32 @@ public class firstSearch {
         }
 
         public void DFS (int s, int t) {
+            boolean [] visited = new boolean [v];
+            int [] prev = new int [v];
+            for (int i = 0; i < v; ++i) {
+                prev[i] = -1;
+                visited[i] = false;
+            }
+            visited[s] = true;
+            recurDFS(s, t, visited, prev);
+            print(prev, s, t);
+            foundDFS = false;
+        }
 
+        private void recurDFS (int s, int t, boolean [] visited, int [] prev) {
+            visited[s] = true;
+            if (s == t) {
+                foundDFS = true;
+                return;
+            }
+            for (int i = 0; i < adj[s].size(); ++i) {
+                if (foundDFS) return;
+                int q = adj[s].get(i);
+                if (!visited[q]) {
+                    prev[q] = s;
+                    recurDFS(q, t, visited, prev);
+                }
+            }
         }
 
         public void print(int [] prev, int t, int s) {
