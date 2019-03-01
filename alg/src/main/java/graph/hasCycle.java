@@ -45,4 +45,35 @@ public class hasCycle {
                 return false;
         return true;
     }
+
+    public boolean topoSorted(graphNode s, int [] inDegree, Queue <Integer> zero, int n) {
+        if (n <= 0) return true;
+        int count = 0;
+        while (!zero.isEmpty()) {
+            int index = zero.poll();
+            for (int i = 0; i < s.data.get(index).size(); ++i) {
+                if (--inDegree[s.data.get(index).get(i)] == 0) 
+                    zero.add(s.data.get(index).get(i));
+            }
+            count++;
+        }
+        return count == n;
+    }
+
+    public boolean isOKTopoSorted (int [][] pairs, int n) {
+        if (n <= 0 && pairs == null && pairs.length == 0) return true;
+        graphNode s = new graphNode(n);
+        int [] inDegree = new int [n];
+        Queue<Integer> zero = new LinkedList<>();
+        for (int i = 0; i < n; ++i) {
+            s.add(pairs[i][1], pairs[i][0]);
+            inDegree[pairs[i][0]]++;
+        }
+        for (int i = 0; i < n; ++i) {
+            if (inDegree[i] == 0) 
+                zero.add(i);
+        }
+        return topoSorted(s, inDegree, zero, n);
+        
+    }
 }
