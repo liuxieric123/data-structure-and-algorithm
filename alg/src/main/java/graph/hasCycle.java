@@ -19,7 +19,7 @@ public class hasCycle {
         }
     }
 
-    public boolean hasCycle(graphNode s, boolean [] onStack, boolean [] checked, int index){
+    public boolean hasCycle(graphNode s, boolean [] onStack, boolean [] checked, int index, Stack <Integer> s){
         if (onStack[index]) return true;
         onStack[index] = true;
         for (int i = 0; i < s.data.get(index).size(); ++i) {
@@ -28,6 +28,7 @@ public class hasCycle {
             }
         }
         checked[index] = true;
+        s.push(index);
         onStack[index] = false;
         return true;
     }
@@ -40,17 +41,22 @@ public class hasCycle {
         }
         boolean [] onStack = new boolean[n];
         boolean [] checked = new boolean[n];
+        Stack <Integer> s = new Stack<>();
         for (int i = 0; i < n; ++i)
-            if (!checked[i] && hasCycle(graph, onStack, checked, i))
+            if (!checked[i] && hasCycle(graph, onStack, checked, i, s))
                 return false;
+        for (int i = 0; i < n; ++i) {
+            System.out.print(s.pop());
+        }
         return true;
     }
 
-    public boolean topoSorted(graphNode s, int [] inDegree, Queue <Integer> zero, int n) {
+    public boolean topoSorted(graphNode s, int [] inDegree, Queue <Integer> zero, int n, Queue<Integer> q) {
         if (n <= 0) return true;
         int count = 0;
         while (!zero.isEmpty()) {
             int index = zero.poll();
+            q.add(index);
             for (int i = 0; i < s.data.get(index).size(); ++i) {
                 if (--inDegree[s.data.get(index).get(i)] == 0) 
                     zero.add(s.data.get(index).get(i));
@@ -65,6 +71,7 @@ public class hasCycle {
         graphNode s = new graphNode(n);
         int [] inDegree = new int [n];
         Queue<Integer> zero = new LinkedList<>();
+        Queue<Integer> q = new LinkedList<>();
         for (int i = 0; i < n; ++i) {
             s.add(pairs[i][1], pairs[i][0]);
             inDegree[pairs[i][0]]++;
@@ -73,7 +80,14 @@ public class hasCycle {
             if (inDegree[i] == 0) 
                 zero.add(i);
         }
-        return topoSorted(s, inDegree, zero, n);
+        boolean flag = topoSorted(s, inDegree, zero, n, q);
+        if (flag) {
+            for (int i = 0; i < n; i++){
+                System.out.print(q.poll());
+            }
+        } 
+
+        return flag;
         
     }
 }
