@@ -43,7 +43,25 @@ public class singleListSort{
         return dummy.next;
     }
 
-    public ListNode quickSort (ListNode s) {
+    public void quickSort (ListNode s, ListNode end) {
+        if (s == end || s == null || end == null) return;
+        int pivot = s.val;
+        ListNode i=s, j=s.next;
+        while (j != end) {
+            if (j.val <= pivot) {
+                i = i.next;
+                swap(i, j);
+            }
+            j = j.next;
+        }
+        swap(s, i);
+        quickSort(s, i);
+        quickSort(i.next, s);
+    }
 
+    public void swap(ListNode s, ListNode p) {
+        int tmp = s.val;
+        s.val = p.val;
+        p.val = tmp;
     }
 }
