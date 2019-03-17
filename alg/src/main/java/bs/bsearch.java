@@ -17,12 +17,28 @@ public class bsearch {
         int high = n - 1;
         while(low <= high) {
             int mid = low + ((high - low) >> 1);
-            if (nums[mid] == val) {
+            if (nums[mid] == val && nums[mid - 1] < val) {
                 return mid;
             } else if (nums[mid] < val) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public int bsFirstEqual (int [] nums, int n, int val) {
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (nums[mid] > val) {
+                high = mid - 1;
+            } else if (nums[mid] < val) {
+                low = mid - 1;
+            } else {
+                if (mid == 0 || nums[mid - 1] < val) return mid;
+                else high = mid - 1;
             }
         }
         return -1;
