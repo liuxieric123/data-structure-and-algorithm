@@ -17,4 +17,27 @@ public class lengthOfLIS {
         }
         return max;
     }
+
+    public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int [] d = new int [nums.length];
+        int len = 0;
+        for (int x: nums) {
+            int i = insertPosition(d, len, x);
+            d[i] = x;
+            if (i == len) ++len;
+        }
+        return len;
+    }
+    
+    public int insertPosition (int [] nums, int len, int d) {
+        int low = 0, high = len - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (nums[mid] > d) high = mid - 1;
+            else if (nums[mid] < d) low = mid + 1;
+            else return mid;
+        }
+        return low;
+    }
 }
