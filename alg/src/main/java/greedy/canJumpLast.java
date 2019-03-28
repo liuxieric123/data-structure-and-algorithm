@@ -1,6 +1,6 @@
 package greedy;
 
-public class canJumpLat {
+public class canJumpLast {
     public boolean solution (int [] nums) {
         if (nums == null || nums.length == 0) return false;
         int n = nums.length, max = 0;
