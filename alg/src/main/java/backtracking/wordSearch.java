@@ -17,13 +17,13 @@ public class wordSearch {
 
     public boolean exist(int [][] board, boolean [][] visited, String word, int i, int j, int idx) {
         if (idx == word.length()) return true;
-        if (i < 0 || i > board.length() || j < 0 || j > board[0].length || 
-        visited[i][j] = true || word.charAt(idx) != board[i][j]) {
+        if (i < 0 || i > board.length || j < 0 || j > board[0].length || 
+        visited[i][j] == true || word.charAt(idx) != board[i][j]) {
             return false;
         }
         visited[i][j] = true;
-        boolean exi = (exist(board, visited, i-1, j, idx+1) || exist(board, visited, i+1, j, idx+1) 
-        || exist(board, visited, i, j-1, idx+1) || exist(board, visited, i, j+1, idx+1));
+        boolean exi = (exist(board, visited, word, i-1, j, idx+1) || exist(board, visited, word, i+1, j, idx+1) 
+        || exist(board, visited, word, i, j-1, idx+1) || exist(board, visited, word, i, j+1, idx+1));
         visited[i][j] = false;
         return exi;
     }
