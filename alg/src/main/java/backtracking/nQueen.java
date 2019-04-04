@@ -54,5 +54,39 @@ public class nQueen {
     //     }
     //     return true;
     // }
-
+    public List<List<String>> solveNQueens(int n) {
+        List <List<String>> set = new ArrayList<List <String>>();
+        List <String> result = new ArrayList<>();
+        int up = 0, right = 0, left = 0;
+        calBit(set, result, 0, n, up, right, left);
+        return set;
+    }
+    
+    public void calBit(List <List<String>> set, List <String> result, 
+                    int row, int n, int up, int right, int left) {
+        if (row == n) {
+            set.add(new ArrayList(result));
+            return;
+        } else {
+            int available = ((1 << n)-1) & (~(up | (right >> (n-row-1)) | (left >> row)));
+            while(available != 0) {
+                int p = available & -available;
+                available ^= p;
+                String s = "";
+                for (int j = 0; j < n; ++j) {
+                    if ((p >> j) != 1) s +='.';
+                    else s += 'Q';
+                }
+                up ^= p;
+                right ^= (p << (n-row-1));
+                left ^= (p << row);
+                result.add(s);
+                calBit(set, result, row+1, n, up, right, left);
+                up ^= p;
+                right ^= (p << (n-row-1));
+                left ^= (p << row);
+                result.remove(result.size()-1);
+            }
+        }
+    }
 }
