@@ -7,41 +7,52 @@ public class nQueen {
     public List<List<String>> solution(int n) {
         List <List<String>> set = new ArrayList<List <String>>();
         List <String> result = new ArrayList<>();
-        cal(set, result, 0, n);
+        boolean [] up = new boolean [n];
+        boolean [] right = new boolean [2*n-1];
+        boolean [] left = new boolean [2*n-1];
+        cal(set, result, 0, n, up, right, left);
         return set;
     }
 
     public void cal(List <List<String>> set, List <String> result, 
-                    int row, int n) {
+                    int row, int n, boolean [] up, boolean [] right, 
+                    boolean [] left) {
         if (row == n) {
             // 这个地方插入的是引用，应该使用result重新构建一个对象
             set.add(new ArrayList(result));
             return;
         } else {
             for (int i = 0; i < n; ++i) {
-                if (isOk(result, row, i, n)) {
+                if (up[i] || right[n+row-i-1] || left[i+row]) {
                     String s = "";
                     for (int j = 0; j < n; ++j) {
                         if (i != j) s += '.';
                         else s += 'Q';
                     }
                     result.add(s);
-                    cal(set, result, row+1, n);
+                    up[i] = true;
+                    right[n+row-i-1] = true;
+                    left[i+row] = true;
+                    cal(set, result, row+1, n, up, right, left);
                     result.remove(result.size()-1);
+                    up[i] = false;
+                    right[n+row-i-1] = false;
+                    left[i+row] = false;
                 }
             }
         }
     }
 
-    public boolean isOk(List <String> result, int row, int idx, int n) {
-        for (int i = 1; i < row+1; ++i) {
-            int left = idx - i;
-            int right = idx + i;
-            if (left >= 0 && result.get(row - i).charAt(left) == 'Q') return false;
-            if (right < n && result.get(row - i).charAt(right) == 'Q') return false;
-            if (result.get(row - i).charAt(idx) == 'Q') return false;
-        }
-        return true;
-    }
+    // public boolean isOk(List <String> result, int row, int idx, int n,
+    //                     boolean [] up, boolean [] right, boolean [] left) {
+    //     for (int i = 1; i < row+1; ++i) {
+    //         int left = idx - i;
+    //         int right = idx + i;
+    //         if (left >= 0 && result.get(row - i).charAt(left) == 'Q') return false;
+    //         if (right < n && result.get(row - i).charAt(right) == 'Q') return false;
+    //         if (result.get(row - i).charAt(idx) == 'Q') return false;
+    //     }
+    //     return true;
+    // }
 
 }
