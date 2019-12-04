@@ -45,5 +45,4 @@ class Solutio {
             }
             return maxLen;
         }
-
 };
