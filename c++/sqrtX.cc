@@ -13,4 +13,14 @@ public:
         }
         return high;
     }
+
+     int mySqrt1(int x) {
+        if (x == 0) return 0;
+        if (x == 1) return 1;
+        double ret = 1;
+        while(abs(ret * ret - x) >= 1) {
+            ret = (ret + x / ret) / 2;
+        }
+        return ret;
+    }
 };
