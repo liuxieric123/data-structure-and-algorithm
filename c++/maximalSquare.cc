@@ -20,19 +20,13 @@ public:
                 if (states[i-1][j-1] == 0 || matrix[i][j] == '0')
                     states[i][j] = matrix[i][j] == '1' ? 1 : 0;
                 else {
-                    // 定义一个变量判断是否可以形成扩充正方形
-                    bool flag = true;
+                    states[i][j] = 1;
                     for (int z = 1; z <= sqrt(states[i-1][j-1]); ++z) {
                         if (matrix[i][j-z] == '0' || matrix[i-z][j] == '0') {
-                            flag = false;
-                            // 考虑如果不能与前对角线形成扩充，可能与前对角线的正方形局部形成正方形
-                            states[i][j] = z*z;
                             break;
                         }
+                        states[i][j] = (z+1)*(z+1);
                     }
-                    if (flag) {
-                        states[i][j] = (sqrt(states[i-1][j-1])+1)*(sqrt(states[i-1][j-1])+1);
-                    }  
                 }
                 area = max(area, states[i][j]);
             }
