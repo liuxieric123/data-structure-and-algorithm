@@ -9,15 +9,11 @@ public:
             else states[i] = grid[0][i] + states[i-1];
         }
         for (int i = 1; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
+            states[0] = states[0] + grid[i][0];
+            for (int j = 1; j < n; ++j) {
                 int top = states[j];
-                if (j == 0) {
-                    states[j] = top + grid[i][j];
-                }
-                else {
-                    int left = states[j-1];
-                    states[j] = min(top+grid[i][j], left+grid[i][j]);
-                }
+                int left = states[j-1];
+                states[j] = min(top+grid[i][j], left+grid[i][j]);
             }
         }
         return states[n-1];
