@@ -14,4 +14,15 @@ public:
         }
         return false;
     }
+
+     bool judgeSquareSum1(int c) {
+        int end = sqrt(c);
+        set<int> set_tmp;
+        for (int i = 0; i <= end; ++i) {
+            set_tmp.insert(i*i);
+            if (set_tmp.find(c-i*i) != set_tmp.end())
+                return true;
+        }
+        return false;
+    }
 };
