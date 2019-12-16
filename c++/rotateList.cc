@@ -16,8 +16,8 @@ public:
             handle = handle -> next;
         }
         handle -> next = head;
-        k %= count;
-        for (int i = 0; i < count - k - 1; ++i) head = head -> next;
+        k = count - (k%count) - 1;
+        for (int i = 0; i < k; ++i) head = head -> next;
         handle = head -> next;
         head -> next = NULL;
         return handle;
