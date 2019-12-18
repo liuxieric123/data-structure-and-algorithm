@@ -23,4 +23,27 @@ public:
         }
         return ret;
     }
+
+    int mySqrt2(int x) {
+        if (x == 0) return 0;
+        int low = 1, high = x;
+        while(low < high) {
+            int mid = low + (high - low) / 2;
+            if (mid < int(sqrt(x))) low = mid + 1;
+            else high = mid;
+        }
+        return low;
+    }
+
+    int mySqrt(int x) {
+        if (x == 0) return 0;
+        if (x == 1) return 1;
+        int low = 1, high = x;
+        while(low < high) {
+            int mid = low + (high - low) / 2;
+            if (x / mid >= mid) low = mid + 1;
+            else high = mid;
+        }
+        return low-1;
+    }
 };
