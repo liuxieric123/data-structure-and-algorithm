@@ -19,4 +19,22 @@ public:
         if (min != NULL && min -> val <= root -> val) return false;
         return isValidBST(root -> left) && isValidBST(root -> right);
     }
+
+    bool isValidBST1(TreeNode* root) {
+        if (root == NULL) return true;
+        stack<TreeNode*> nodes;
+        long inorder = LONG_MIN;
+        while(!nodes.empty() || root != NULL) {
+            while(root != NULL) {
+                nodes.push(root);
+                root = root -> left;
+            }
+            root = nodes.top();
+            nodes.pop();
+            if (root -> val <= inorder) return false;
+            inorder = root -> val;
+            root = root -> right;
+        }
+        return true;
+    }
 };
