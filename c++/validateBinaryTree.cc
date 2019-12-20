@@ -37,4 +37,14 @@ public:
         }
         return true;
     }
+
+    bool isValidBST2(TreeNode* root) {
+        return judge(root, LONG_MAX, LONG_MIN);
+    }
+
+    bool judge(TreeNode* root, long upper, long lower) {
+        if (root == NULL) return true;
+        if (root -> val >= upper || root -> val <= lower) return false;
+        return judge(root -> left, root -> val, lower) && judge(root -> right, upper, root -> val);
+    }
 };
