@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+// T:O(n), S:O(n)
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int sum) {
