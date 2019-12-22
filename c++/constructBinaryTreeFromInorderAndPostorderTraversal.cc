@@ -25,7 +25,7 @@ public:
         int left, int right, map<int, int> & index) {
         if (right < left) return NULL;
         TreeNode* node = new TreeNode(postorder[start]);
-        int rootIdx = index[postorder[start]];
+        int rootIdx = start;
         start -= 1;
         if (right == left) return node;
         node -> right = dfs(inorder, postorder, start, index[postorder[rootIdx]]+1, right, index);
