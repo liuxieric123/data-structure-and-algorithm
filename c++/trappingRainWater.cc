@@ -17,4 +17,20 @@ public:
         }
         return count;
     }
+
+    int trap1(vector<int>& height) {
+        int size = height.size();
+        if (size < 3) return 0;
+        int leftMax = 0, rightMax = 0, count = 0, l = 0, r = size - 1;
+        while(l <= r) {
+            if (leftMax < rightMax) {
+                height[l] < leftMax ? count += leftMax - height[l] : leftMax = height[l];
+                ++l;
+            } else {
+                height[r] < rightMax ? count += rightMax - height[r] : rightMax = height[r];
+                --r;
+            }
+        }
+        return count;
+    }
 };
