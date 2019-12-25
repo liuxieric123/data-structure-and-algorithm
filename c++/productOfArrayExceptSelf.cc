@@ -21,4 +21,21 @@ public:
         }
         return ret;
     }
+
+    vector<int> productExceptSelf1(vector<int>& nums) {
+        int size = nums.size();
+        if (size == 0) return {};
+        vector<int> left;
+        
+        left.push_back(1);
+        for (int i = 1; i < size; ++i) {
+            left.push_back(left[i-1]*nums[i-1]);
+        }
+        int right = 1;
+        for (int i = size-1; i >= 0; --i) {
+            left[i] = right*left[i];
+            right *= nums[i];
+        }
+        return left;
+    }
 };
