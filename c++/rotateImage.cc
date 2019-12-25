@@ -21,4 +21,20 @@ public:
         }
         return;
     }
+
+    void rotate1(vector<vector<int>>& matrix) {
+        int row = matrix.size();
+        if (row == 0) return;
+        int col = matrix[0].size();
+        if (col == 0) return;
+        for (int i = 0; i < row; ++i) {
+            for (int j = i + 1; j < col; ++j) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        for (int i = 0; i < row; ++i) {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+        return;
+    }
 };
