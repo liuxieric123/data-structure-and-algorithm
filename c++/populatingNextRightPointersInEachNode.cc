@@ -42,7 +42,7 @@ public:
         return root;
     }
 
-    Node* connect(Node* root) {
+    Node* connect1(Node* root) {
         if (root == NULL || root -> left == NULL) return root;
         if (root -> right) root -> left -> next = root -> right;
         if (root -> next) root -> right -> next = root -> next -> left;
@@ -51,5 +51,21 @@ public:
         return root;
     }
 
-    
+     Node* connect2(Node* root) {
+        if (root == NULL) return NULL;
+        Node* leftMost = root -> left;
+        Node* p = root;
+        while(leftMost) {
+            while(p) {
+                if (p->right) p -> left -> next = p -> right;
+                if (p->next) p -> right -> next = p -> next -> left;
+                p = p -> next;
+            }
+            p = leftMost;
+            leftMost = leftMost -> left;
+        }
+        return root;
+    }
+
+
 };

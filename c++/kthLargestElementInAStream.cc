@@ -1,5 +1,9 @@
 #include <queue>
+#include <vector>
+#include <algorithm>
 
+using std::vector;
+using std::greater;
 using std::priority_queue;
 
 class KthLargest {

@@ -18,4 +18,20 @@ public:
         }
         return;
     }
+
+     void moveZeroes1(vector<int>& nums) {
+        int size = nums.size();
+        int f = 0;
+        int s = 0;
+        while(f != size) {
+            if (nums[f] != 0) {
+                swap(nums[f], nums[s]);
+                ++f;
+                ++s;
+            } else {
+                ++f;
+            }
+        }
+        return;
+    }
 };

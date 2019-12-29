@@ -42,8 +42,4 @@ public:
         }
         return ret;
     }
-
-    ListNode * addTwoNumbers1(ListNode * l1, ListNode * l2) {
-
-    }
 };

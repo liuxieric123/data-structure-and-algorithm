@@ -15,4 +15,16 @@ public:
         }
         return size;
     }
+
+    int removeDuplicates1(vector<int>& nums) {
+        int size = nums.size();
+        if (size == 0) return 0;
+        int p = 1;
+        for (int q = 1; q < size; ++q) {
+            if (nums[q] != nums[q-1]) {
+                nums[p++] = nums[q];
+            }
+        }
+        return p;
+    }
 };
