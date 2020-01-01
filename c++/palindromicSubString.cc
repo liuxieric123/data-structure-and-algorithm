@@ -21,4 +21,26 @@ public:
         }
         return count;
     }
+
+     int countSubstrings1(string s) {
+        int size = s.size();
+        if (size == 0) return 0;
+        int count = 0;
+        for (int i = 0; i < size; ++i) {
+            int len = expand(s, i, i);
+            int len1 = expand(s, i, i+1);
+            if (len > 0) count += ((len+1) / 2);
+            if (len1 > 0) count += (len1 / 2);
+
+        }
+        return count;
+    }
+
+    int expand(string & s, int left, int right) {
+        while(left >= 0 && right < s.size() && s[left] == s[right]) {
+            --left;
+            ++right;
+        }
+        return right - 1 - left;
+    }
 };
