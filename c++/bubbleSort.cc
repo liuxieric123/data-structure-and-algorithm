@@ -11,11 +11,14 @@ void sort(vector<int> & nums) {
     int size = nums.size();
     if (size == 0) return;
     for (int i = size - 1; i > 0; --i) {
+        bool swaped = false;
         for (int j = 0; j < i; ++j) {
             if (nums[j+1] < nums[j]) {
                 swap(nums[j+1], nums[j]);
+                swaped = true;
             }
         }
+        if (swaped) break;
     }
     return;
 }
